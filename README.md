@@ -89,7 +89,7 @@ You can refer to the <a href="https://docs.github.com/en/pull-requests/collabora
 
 ### License
 
-Licensed through the Apache License 2.0
+Licensed through the Apache License 2.0.
 
 
 
