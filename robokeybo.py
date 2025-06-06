@@ -58,8 +58,6 @@ def resource_path(relative_path):
 
 
 
-    
-
 # --- Configuration ---
 DEFAULT_WPM = 120
 MIN_WPM = 10
@@ -347,12 +345,13 @@ class AutoTypeApp:
             self.master.after(100, lambda: self.status_label.config(text=f"Autotyping... Press {self.current_hotkey} again to STOP.", fg="green"))
             logging.info("Autotype started by hotkey.")
         else:
+            # When hotkey is pressed again to stop, simply set the event.
+            # The perform_autotype thread will detect this and handle cleanup.
             self.typing_stop_event.set()
             self.master.after(100, lambda: self.status_label.config(text="Autotype stopped by hotkey. Ready.", fg="gray"))
             logging.info("Autotype stopped by hotkey.")
-            # _finish_autotype_process will handle re-enabling controls,
-            # but we can explicitly call it here for immediate UI update in case of hotkey stop
-            self._finish_autotype_process() 
+            # Do NOT call _finish_autotype_process here, as it will be called by the typing thread itself.
+
 
     def start_hotkey_listener(self):
         if self.pynput_listener:
@@ -421,9 +420,6 @@ class AutoTypeApp:
 
 
     def toggle_autotype_enabled(self):
-        # Do NOT disable autotype_button here; it should always be clickable to toggle
-        # self.hotkey_input_entry.config(state=tk.DISABLED) # No longer needed here
-
         self.autotype_enabled = not self.autotype_enabled
         self.update_autotype_button_state()
 
@@ -442,15 +438,18 @@ class AutoTypeApp:
             logging.info("Autotype enabled. Awaiting hotkey press to start/stop.")
             # Input controls remain enabled until typing starts
         else:
-            # If autotype is being disabled and typing is active, stop it forcefully
+            # If autotype is being disabled and typing is active, signal the typing thread to stop.
             if self.typing_active:
                 self.typing_stop_event.set() # Signal the typing thread to stop
-            # Always perform cleanup and re-enable controls when deactivating
-            self.typing_active = False 
-            self.typing_stop_event.clear()
+            # Do NOT reset typing_active, clear event, or re-enable controls here.
+            # The _finish_autotype_process will handle these after the typing thread stops.
             self.status_label.config(text="Autotype DISABLED. Click button to ENABLE.", fg="red")
             logging.info("Autotype disabled by button click.")
-            self._re_enable_input_controls()
+            # _re_enable_input_controls() will be called by _finish_autotype_process if typing was active.
+            # If typing wasn't active, ensure controls are re-enabled directly.
+            if not self.typing_active: # If typing was not active, controls might be disabled if a hotkey started it and then the button was pressed.
+                self._re_enable_input_controls() # Ensure controls are re-enabled even if typing wasn't active.
+                self.typing_stop_event.clear() # Clear the event for a clean state if no typing occurred.
 
 
     def update_autotype_button_state(self):
@@ -529,7 +528,7 @@ class AutoTypeApp:
         self.typing_active = False
         self.typing_stop_event.clear() # Always clear the event after a session
         self.master.after(0, lambda: self.status_label.config(text="Autotyping complete. Ready.", fg="gray"))
-        logging.info("Autotyping finished (or stopped forcefully).")
+        logging.info("Autotyping finished (or stopped forcefully).\n") # Added newline for clarity
         # Ensure controls are re-enabled
         self._re_enable_input_controls()
 
@@ -558,4 +557,3 @@ if __name__ == "__main__":
             # Ensure Tkinter root is destroyed even if an error occurs early
             root.destroy()
         sys.exit(1)
-
