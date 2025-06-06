@@ -66,7 +66,8 @@ pip install pyinstaller pynput pystray Pillow
 - Enter the following command:
 
   ```bash
-  pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.png;." robokeybo.py ```
+  pyinstaller --onefile --windowed --icon=icon.ico --add-data "icon.png;." robokeybo.py
+  ```
 
 
 - This will create some temporary files. After the build succeeds, go to the newly created folder named **"dist"** and run the EXE program generated.
