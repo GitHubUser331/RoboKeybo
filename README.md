@@ -8,11 +8,11 @@ This application can be used to automatically type text into a text area, just w
 Installing RoboKeybo is quite easy;
 
 - Go to <a href="https://github.com/GitHubUser331/RoboKeybo/releases">releases.</a> Download the latest standalone EXE file.
-- Then, double-click the EXE file and you are good to go! It's that simple.
+- Then, double-click the EXE file, and you are good to go! It's that simple.
 
 ## Use
 
-It has a simple GUI interface that is user-friendly. Here's how to use:
+It has a simple GUI interface that is user-friendly. Here's how to use it:
 
 - When you run the program, you'll see a text area. Paste or type the text you want to be automatically typed into your chosen text area (except the program's own text box).
 - Click the **Activate Autotype** button and move to your desired typing area. Then press the 'z' key (which is the default hotkey) and wait for approximately 3 seconds.
@@ -20,7 +20,7 @@ It has a simple GUI interface that is user-friendly. Here's how to use:
 
 ## Features
 
-You can even adjust the typing speed and assign a custom hotkey (except modifier keys and combinations) in the program. This program can run minimized into the system tray and can be used even it is in the background.
+You can even adjust the typing speed and assign a custom hotkey (except modifier keys and combinations) in the program. This program can run minimized into the system tray and can be used even when it is in the background.
 
 You can do much more with this program.
 
@@ -29,7 +29,7 @@ You can do much more with this program.
 
 This program is designed to be very minimal and bug-free. In case you find any bugs, please report them here.
 
-For additional debugging and developing, a "robokey_log.txt" fil;e is generated when you run the program. This contains all the important **events** and **logs.**
+For additional debugging and developing, a "robokey_log.txt" file is generated when you run the program. This contains all the important **events** and **logs.**
 You can also help in debugging and contributing to this program.
 
 
@@ -39,7 +39,7 @@ The program is made fully open-source and free. The source code is available her
 
 **Build & Deploy/Package**
 
-To get started, you'll need to download the source code by clicking the green **"Code"** button and then clicking **"Download ZIP"**.
+To get started, you'll need to download the source code by clicking the green **"Code"** button and then clicking **"Download ZIP".**
 
 After downloading, extract the ZIP file and open the **robokeybo.py** file present in the folder.
 
@@ -55,13 +55,13 @@ pip install pyinstaller pynput pystray Pillow
  
 **Modification**
 
-- You can modify, add or remove anything in the Python code file. 
+- You can modify, add, or remove anything in the Python code file. 
 - After you are done with the main code, you can build the program.
 
 *To build your version of this program, follow these steps:*
 
-- Make sure each file is present. **Dont remove** any files.
-- **Shift+Right click** to open the context menu, Select **Open a PowerShell/Command Prompt window here...** in the folder only.
+- Make sure each file is present. **Don't remove** any files.
+- **Shift+Right click** to open the context menu. Select **Open a PowerShell/Command Prompt window here...** in the folder only.
 - To use your icon, replace the **icon.ico** and **icon.png** with your image, but **don't rename** it.
 - Enter the following command:
 
@@ -81,7 +81,7 @@ You can refer to the <a href="https://docs.github.com/en/pull-requests/collabora
 ## Credits
 
 - The <a href="https://www.python.org/psf-landing/">Python Software Foundation</a> for the Python library and dependencies.
-- All the contributors of this project.
+- All the contributors to this project.
 
 
 # Made by **GitHubUser331** with ♥. 
